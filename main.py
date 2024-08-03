@@ -4,6 +4,7 @@ import requests
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
 global data_set
 
@@ -103,3 +104,47 @@ if st.button("Draw the distribution plot of:"):
 
     # Plot Employee Average Monthly Hours
     plot_distribution(data_set, 'average_montly_hours', 'Employee Average Monthly Hours Distribution')
+
+# Added a button
+# Perform clustering of employees who left based on their satisfaction and evaluation.
+if st.button("Perform K means clustering with K = 3"):
+    st.write("## 3.1 Choose columns satisfaction_level, last_evaluation, and left.")
+    # Filter data for employees who left
+    left_employees = data_set[data_set['left'] == 1]
+
+    # Select relevant columns
+    data_for_clustering = left_employees[['satisfaction_level', 'last_evaluation']]
+
+    # Determine the optimal number of clusters using the elbow method
+    inertia = []
+    K = range(1, 10)
+    for k in K:
+        kmeans = KMeans(n_clusters=k, random_state=42)
+        kmeans.fit(data_for_clustering)
+        inertia.append(kmeans.inertia_)
+
+    # Plot the elbow curve
+    plt.figure(figsize=(8, 5))
+    plt.plot(K, inertia, 'bx-')
+    plt.xlabel('Number of clusters (k)')
+    plt.ylabel('Inertia')
+    plt.title('Elbow Method For Optimal k')
+    st.pyplot(plt)
+
+    # Perform K-Means clustering with 3 clusters
+    st.write("## Do K-means clustering of employees who left the company into 3 clusters")
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    clusters = kmeans.fit_predict(data_for_clustering)
+
+    # Add cluster labels to the data
+    data_for_clustering['cluster'] = clusters
+
+    # Visualize the clusters
+    plt.figure(figsize=(10, 6))
+    plt.scatter(data_for_clustering['satisfaction_level'], data_for_clustering['last_evaluation'],
+                c=data_for_clustering['cluster'], cmap='viridis', marker='o', edgecolor='k', s=50)
+    plt.xlabel('Satisfaction Level')
+    plt.ylabel('Last Evaluation')
+    plt.title('Clustering of Employees Who Left')
+    plt.colorbar(label='Cluster')
+    st.pyplot(plt)
