@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import requests
 import streamlit as st
-#import seaborn as sns
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 global data_set
@@ -10,7 +10,7 @@ global data_set
 # Define a function to create and display distribution plots
 def plot_distribution(data, column, title):
     fig, ax = plt.subplots()
-    #sns.histplot(data[column], kde=True, ax=ax)
+    sns.histplot(data[column], kde=True, ax=ax)
     ax.set_title(title)
     ax.set_xlabel(column)
     ax.set_ylabel('Frequency')
@@ -82,7 +82,7 @@ if st.button("2. Click here ! what contributed most to employee"):
 
     # Draw the heatmap
     plt.figure(figsize=(10, 8))
-    #sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
     plt.title('Correlation Matrix Heatmap')
 
     # Show the heatmap in Streamlit
