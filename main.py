@@ -106,6 +106,18 @@ if st.button("Draw the distribution plot of:"):
     plot_distribution(data_set, 'average_montly_hours', 'Employee Average Monthly Hours Distribution')
 
 # Added a button
+if st.button("Draw the bar plot of the employee project count"):
+    # Draw the bar plot of the employee project count of both employees who left and stayed in the organization (use column number_project and hue column left), and give your inferences from the plot.
+    data_set['left'] = data_set['left'].astype(str)
+    plt.figure(figsize=(12, 8))
+    sns.countplot(x='number_project', hue='left', data=data_set, palette='viridis')
+    plt.xlabel('Number of Projects')
+    plt.ylabel('Employee Count')
+    plt.title('Employee Project Count: Stayed vs. Left')
+    plt.legend(title='Left', labels=['Stayed', 'Left'])
+    st.pyplot(plt)
+
+# Added a button
 # Perform clustering of employees who left based on their satisfaction and evaluation.
 if st.button("Perform K means clustering with K = 3"):
     st.write("## 3.1 Choose columns satisfaction_level, last_evaluation, and left.")
