@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import requests
 import streamlit as st
 
 # Set the page configuration
@@ -13,27 +14,39 @@ st.set_page_config(
     # You can add instructions for users to resize the window manually.
 )
 
-st.title("Developed by Mr. Lokendra Kumar Agrawal!")
-st.write("Company Name : Portobello Tech")
-st.write("Resize your browser window to a smaller size for a better experience.")
+st.title("Employee Turnover Analysis using AI and Machine Learning")
+st.title("Company Name : Portobello Tech")
+st.write("## Developed by : Mr. Lokendra Kumar Agrawal")
 
 # Add some example content
-st.write("## Example Content")
-st.write("Here is some example content to display in your app.")
-st.write("You can add more elements like text, charts, tables, etc.")
+st.write("## This Tools will suggest you !!!!")
+st.write("1. various retention strategies for targeted employees.")
+st.write("2. categorize the employees into four zones.")
+st.write("▪ Safe Zone (Green) (Score < 20%)")
+st.write("▪ Low-Risk Zone (Yellow) (20% < Score < 60%)")
+st.write("▪ Medium-Risk Zone (Orange) (60% < Score < 90%)")
+st.write("▪ High-Risk Zone (Red) (Score > 90%)")
 
 # Add a simple input and output
-name = st.text_input("Enter your name:")
+name = st.text_input("Enter Data Set CSV file :")
 if name:
-    st.write(f"Hello, {name}!")
+    st.write(f"Your file Name is , {name}!")
 
 # Add a button
-if st.button("Click me!"):
-    st.write("Button clicked!")
+if st.button("Calculate !"):
+    st.write("Check output file!")
 
 # Add an image (optional)
-# You can add an image from a URL or a file
-st.image("https://via.placeholder.com/150", caption="Example Image")
+# image ID
+file_id = "1XM3dOmnOsRYJjU5uWP07ixU4G0HTParr"
+# URL
+image_url = f"https://drive.google.com/uc?export=view&id={file_id}"
+try:
+    response = requests.get(image_url)
+    # st.image(response.content)
+    st.image(response.content, caption="Developer Image", width=200)
+except Exception as e:
+    st.write("Error loading image:", e)
 chart_data = pd.DataFrame(
     np.random.randn(20, 3),
     columns=["a", "b", "c"]
