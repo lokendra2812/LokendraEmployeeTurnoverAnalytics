@@ -7,6 +7,16 @@ import matplotlib.pyplot as plt
 
 global data_set
 
+# Define a function to create and display distribution plots
+def plot_distribution(data, column, title):
+    fig, ax = plt.subplots()
+    sns.histplot(data[column], kde=True, ax=ax)
+    ax.set_title(title)
+    ax.set_xlabel(column)
+    ax.set_ylabel('Frequency')
+    st.pyplot(fig)
+
+
 # Set the page configuration
 st.set_page_config(
     page_title="Employee Turnover Analysis using AI and Machine Learning",
@@ -86,3 +96,17 @@ if st.button("2. Click here ! what contributed most to employee"):
     st.pyplot(plt)
 
 # Added a button
+if st.button("Draw the distribution plot of:"):
+
+    st.write("## 2.2 Draw the distribution plot of:")
+    # Set up the Streamlit app
+    st.title("Employee Data Distribution Plots")
+
+    # Plot Employee Satisfaction
+    plot_distribution(data_set, 'satisfaction_level', 'Employee Satisfaction Distribution')
+
+    # Plot Employee Evaluation
+    plot_distribution(data_set, 'last_evaluation', 'Employee Evaluation Distribution')
+
+    # Plot Employee Average Monthly Hours
+    plot_distribution(data_set, 'average_montly_hours', 'Employee Average Monthly Hours Distribution')
