@@ -10,3 +10,4 @@ trubrics>=1.4.3
 scikit-learn
 streamlit-feedback
 langchain-community
+numpy
