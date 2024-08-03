@@ -148,3 +148,24 @@ if st.button("Perform K means clustering with K = 3"):
     plt.title('Clustering of Employees Who Left')
     plt.colorbar(label='Cluster')
     st.pyplot(plt)
+
+   # 3.3 Based on the satisfaction and evaluation factors, give your thoughts on the employee clusters.
+    st.write("""
+    ## Employee Clustering Analysis
+
+    Based on the satisfaction level and last evaluation scores, we have identified three distinct clusters of employees who left the company.
+
+    **Cluster 0 (Low Satisfaction, Low Evaluation)**:
+    - **Characteristics**: Employees in this cluster have low satisfaction levels and low last evaluation scores.
+    - **Possible Reasons for Leaving**: These employees might have felt unrecognized or undervalued due to their low evaluations, contributing to their low satisfaction and subsequent decision to leave. This group might also include underperformed employees who did not receive adequate support or motivation.
+
+    **Cluster 1 (High Satisfaction, High Evaluation)**:
+    - **Characteristics**: Employees in this cluster have high satisfaction levels and high last evaluation scores.
+    - **Possible Reasons for Leaving**: Despite being satisfied and highly evaluated, these employees might have left for reasons unrelated to job satisfaction, such as better opportunities elsewhere, personal reasons, or career advancements. It could also indicate potential issues with retention strategies for top performers.
+
+    **Cluster 2 (Moderate Satisfaction, Moderate to High Evaluation)**:
+    - **Characteristics**: Employees in this cluster have moderate satisfaction levels and moderate to high last evaluation scores.
+    - **Possible Reasons for Leaving**: Employees in this cluster might have been somewhat content with their jobs and received fair evaluations, but other factors such as work-life balance, career growth opportunities, or company culture could have influenced their decision to leave.
+
+    By understanding the distinct characteristics and potential reasons for leaving within each cluster, organizations can implement targeted interventions to improve retention and employee satisfaction.
+    """)
