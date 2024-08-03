@@ -41,12 +41,6 @@ st.write("▪ Low-Risk Zone (Yellow) (20% < Score < 60%)")
 st.write("▪ Medium-Risk Zone (Orange) (60% < Score < 90%)")
 st.write("▪ High-Risk Zone (Red) (Score > 90%)")
 
-# Add a simple input and output
-name = st.text_input("Enter Customer Name  :")
-if name:
-    st.write(f"Hello , {name}! ")
-    st.write(f"Your report will be ready in few minutes")
-
 # image ID
 file_id = "1XM3dOmnOsRYJjU5uWP07ixU4G0HTParr"
 csv_file_id = "1o_dBdB3qeCh1HlSHcyiw2_uEQYzCclsE"
@@ -59,15 +53,14 @@ try:
     data_set = pd.read_csv(csv_url)
 
     st.image(response.content, caption="Developer Image", width=200)
-    st.write(data_set.head())
 except Exception as e:
     st.write("Error loading image of data set:", e)
 
-chart_data = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=["a", "b", "c"]
-)
-st.line_chart(chart_data)
+# Add a simple input and output
+name = st.text_input("Enter Customer Name  :")
+if name:
+    st.write(f"Hello , {name}! ")
+    st.write(f"Your report will be ready in few minutes")
 
 # Added a button
 if st.button("1. Click here ! for missing values"):
