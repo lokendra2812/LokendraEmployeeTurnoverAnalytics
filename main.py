@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import requests
 import streamlit as st
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 global data_set
 
@@ -57,10 +59,30 @@ chart_data = pd.DataFrame(
 )
 st.line_chart(chart_data)
 
-# Add a button
-if st.button("Calculate !"):
-    st.write("Check output file!")
+# Added a button
+if st.button("1. Click here ! for missing values"):
     # step 1 Perform data quality checks by checking for missing values, if any.
-    st.write("## 1. checking for missing values")
+    st.write("## 1. Checking for missing values")
+    st.write("\n")
     st.write(data_set.isna().sum())
 
+# Added a button
+if st.button("2. Click here ! what contributed most to employee"):
+    # step 2 Understand what factors contributed most to employee turnover at EDA
+    st.write("## 2. Understand what factors contributed most to employee turnover at EDA")
+    st.write("\n")
+    st.write("## 2.1 correlation heatmap")
+    # Extract numerical features for correlation matrix
+    numerical_data = data_set.select_dtypes(include=['float64', 'int64'])
+    # Calculate the correlation matrix
+    correlation_matrix = numerical_data.corr()
+
+    # Draw the heatmap
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
+    plt.title('Correlation Matrix Heatmap')
+
+    # Show the heatmap in Streamlit
+    st.pyplot(plt)
+
+# Added a button
